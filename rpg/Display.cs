@@ -14,7 +14,8 @@ namespace rpg
         private int height = 25;
         private int width = 110;
 
-        private Decor[] decor = new Decor[10000];
+        Decor decor = new();
+        char[,] newfield;
         public Display()
         {
             for (int i = 0; i < field.GetLength(0); i++)
@@ -25,27 +26,12 @@ namespace rpg
                 field[
                     new Random().Next(field.GetLength(0)),
                     new Random().Next(field.GetLength(1))] = '#';
-                decor[i] = new Decor();
-                decor[i].Spawn(
-                    new Random().Next(field.GetLength(0)),
-                    new Random().Next(field.GetLength(1)),
-                    width, height);
             }
-
+            newfield = new char[1000, 1000];
+            Array.Copy(decor.spawn(field, decor.tree), newfield, field.Length);
         }
         public void Render()
         {
-            char[,] newfield = new char[1000,1000];
-            Array.Copy(
-                decor[0].FieldTree(field, x, y),
-                newfield,
-                newfield.Length);
-            for (int i = 1;i < decor.Length; i++)
-               Array.Copy(
-               decor[0].FieldTree(newfield, x, y),
-               newfield,
-               newfield.Length);
-
             int point_x = x - width/2;
             int point_y = y - height/2;
             for (int i = 0; i < height; i++)
@@ -59,7 +45,7 @@ namespace rpg
         }
         public void up() => y--;
         public void down() => y++;
-        public void left() => x++;
-        public void right() => x--;
+        public void left() => x--;
+        public void right() => x++;
     }
 }

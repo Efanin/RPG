@@ -8,23 +8,47 @@ namespace rpg
 {
     internal class Decor
     {
-        private string tree =
-            @" /\ " +
-            @"/  \" +
-            @"/  \" +
-            @" || ";
-        private int x;
-        private int y;
-        private int width;
-        private int height;
+        public List<Prefab> tree = new List<Prefab>();
 
-        public void Spawn(int x, int y, int width, int height)
+        public Decor() 
         {
-            this.x = x;
-            this.y = y;
-            this.width = width;
-            this.height = height;  
+            for (int i = 0; i < 10000; i++)
+            {
+                tree.Add(new Prefab(
+                     @" /\ " +
+                     @"/  \" +
+                     @"/  \" +
+                     @" || ",
+                     new Random().Next(1000),
+                     new Random().Next(1000),
+                     4,4
+                    ));
+            }
         }
+        public char[,] spawn(char[,] field, List<Prefab> prefab)
+        {
+            char[,] newField = new char[1000, 1000];
+            Array.Copy(field, newField, field.Length);
+            for (int n = 0; n < prefab.Count; n++) 
+            {
+                for (int i = 0; i < prefab[n].size_y; i++)
+                {
+                    for (int j = 0; j < prefab[n].size_x; j++)
+                    {
+                        try
+                        {
+                            newField[prefab[n].x + j, prefab[n].y + i] =
+                                prefab[n].mesh[i * prefab[n].size_y + j];
+                        }
+                        catch (Exception ex) { }
+                    }
+                }
+            }
+            return newField;
+        }
+
+
+        /*
         public char[,] FieldTree(char[,] field,int player_x,int player_y)
         {
             if(Math.Abs(player_x-x) < width/2 && 
@@ -42,6 +66,24 @@ namespace rpg
                 return newField;
             }
             return field;
+        }
+        */
+    }
+    public class Prefab
+    {
+        public string mesh { get; private set; }
+        public int x { get; private set; }
+        public int y { get; private set; }
+        public int size_x { get; private set; }
+        public int size_y { get; private set; }
+
+        public Prefab(string mesh, int x, int y, int size_x, int size_y)
+        {
+            this.mesh = mesh;
+            this.x = x;
+            this.y = y;
+            this.size_x = size_x;
+            this.size_y = size_y;
         }
     }
 }
