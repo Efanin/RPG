@@ -1,5 +1,7 @@
 ﻿using rpg;
 
+Console.WriteLine("LOADING...");
+
 Display display = new Display();
 new Thread(
     () =>
@@ -7,7 +9,7 @@ new Thread(
         while (true)
         {
             display.Render();
-            Thread.Sleep(100);
+            Thread.Sleep(10);
         }
     }
     ).Start();

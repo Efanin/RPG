@@ -9,7 +9,7 @@ namespace rpg
     internal class Decor
     {
         public List<Prefab> tree = new List<Prefab>();
-
+        public List<Prefab> bush = new List<Prefab>();
         public Decor() 
         {
             for (int i = 0; i < 10000; i++)
@@ -22,6 +22,12 @@ namespace rpg
                      new Random().Next(1000),
                      new Random().Next(1000),
                      4,4
+                    ));
+                bush.Add(new Prefab(
+                     "#",
+                     new Random().Next(1000),
+                     new Random().Next(1000),
+                     1, 1
                     ));
             }
         }
