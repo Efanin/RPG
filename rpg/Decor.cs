@@ -10,6 +10,7 @@ namespace rpg
     {
         public List<Prefab> tree = new List<Prefab>();
         public List<Prefab> bush = new List<Prefab>();
+        public List<Prefab> house = new List<Prefab>();
         public Decor() 
         {
             for (int i = 0; i < 10000; i++)
@@ -24,10 +25,25 @@ namespace rpg
                      4,4
                     ));
                 bush.Add(new Prefab(
-                     "#",
+                     @" # "+
+                     @"###",
                      new Random().Next(1000),
                      new Random().Next(1000),
-                     1, 1
+                     2, 3
+                    ));
+            }
+            for (int i = 0; i < 2000; i++)
+            {
+                house.Add(new Prefab(
+
+                     @"  __  " +
+                     @" /  \ " +
+                     @"/____\" +
+                     @"| ██ |" +
+                     @"|____|",
+                     new Random().Next(1000),
+                     new Random().Next(1000),
+                     6, 5
                     ));
             }
         }
@@ -44,7 +60,7 @@ namespace rpg
                         try
                         {
                             newField[prefab[n].x + j, prefab[n].y + i] =
-                                prefab[n].mesh[i * prefab[n].size_y + j];
+                                prefab[n].mesh[i * prefab[n].size_x + j];
                         }
                         catch (Exception ex) { }
                     }
@@ -54,32 +70,13 @@ namespace rpg
         }
 
 
-        /*
-        public char[,] FieldTree(char[,] field,int player_x,int player_y)
-        {
-            if(Math.Abs(player_x-x) < width/2 && 
-                Math.Abs(player_y - y) < height / 2)
-            {
-                char[,] newField = new char[1000, 1000];
-                Array.Copy(field, newField, field.Length);
-                for(int i = 0; i < 4; i++)
-                {
-                    for(int j = 0; j < 4; j++)
-                    {
-                        newField[y + i, x + j] = tree[i * 4 + j]; 
-                    }
-                }
-                return newField;
-            }
-            return field;
-        }
-        */
+
     }
     public class Prefab
     {
         public string mesh { get; private set; }
-        public int x { get; private set; }
-        public int y { get; private set; }
+        public int x { get;  set; }
+        public int y { get;  set; }
         public int size_x { get; private set; }
         public int size_y { get; private set; }
 

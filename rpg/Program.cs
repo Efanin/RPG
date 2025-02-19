@@ -9,7 +9,27 @@ new Thread(
         while (true)
         {
             display.Render();
-            Thread.Sleep(10);
+            Thread.Sleep(100);
+        }
+    }
+    ).Start();
+new Thread(
+    () =>
+    {
+        while (true)
+        {
+            display.Render2();
+            Thread.Sleep(100);
+        }
+    }
+    ).Start();
+new Thread(
+    () =>
+    {
+        while (true)
+        {
+            //display.animal();
+            Thread.Sleep(1000);
         }
     }
     ).Start();
