@@ -20,9 +20,12 @@ namespace rpg
         char[,] newfield;
         List<Animal> animals = new List<Animal>();
 
-        
+        public Action Render = null;
+        public Action animal = null;
         public Display()
-        { 
+        {
+            Render += RenderField;
+            animal += animalField;
             for (int i = 0; i < field.GetLength(0); i++)
                 for (int j = 0; j < field.GetLength(1); j++)
                     field[i, j] = ' ';
@@ -47,7 +50,7 @@ namespace rpg
                     ));
             }
             }
-        public void Render()
+        public void RenderField()
         {
             width = Console.WindowWidth;
             height = Console.WindowHeight;
@@ -78,19 +81,30 @@ namespace rpg
         public void right() => x++;
 
         
-        public void animal()
+        public void animalField()
         {
             Array.Copy(field, newfield, field.Length);
             for (int i = 0; i < animals.Count; i++)
             {
                 try
                 {
+                    if (animals[i].x == x && animals[i].y == y)
+                    {
+                        Console.Clear();
+                        animal = null;
+                        Render = Fight;
+                        return;
+                    }
                     newfield[animals[i].x, animals[i].y] = animals[i].mesh[0];
                     animals[i].Move();
                 }
                 catch (Exception ex) { }
                 
             }
+        }
+        public void Fight()
+        {
+            Console.WriteLine("Fight");
         }
     }
 }

@@ -8,7 +8,7 @@ new Thread(
     {
         while (true)
         {
-            display.Render();
+            display.Render?.Invoke();
             Thread.Sleep(100);
         }
     }
@@ -18,7 +18,7 @@ new Thread(
     {
         while (true)
         {
-            display.animal();
+            display.animal?.Invoke();
             Thread.Sleep(1000);
         }
     }
