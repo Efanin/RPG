@@ -72,11 +72,11 @@ namespace rpg
 
 
     }
-    public class Prefab
+    internal class Prefab
     {
         public string mesh { get; private set; }
-        public int x { get;  set; }
-        public int y { get;  set; }
+        public int x { get; private set; }
+        public int y { get; private set; }
         public int size_x { get; private set; }
         public int size_y { get; private set; }
 

@@ -18,17 +18,7 @@ new Thread(
     {
         while (true)
         {
-            display.Render2();
-            Thread.Sleep(100);
-        }
-    }
-    ).Start();
-new Thread(
-    () =>
-    {
-        while (true)
-        {
-            //display.animal();
+            display.animal();
             Thread.Sleep(1000);
         }
     }
